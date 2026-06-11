@@ -231,7 +231,7 @@ export default async function DestinationLandingPage({ params }: { params: any }
                 <p className="text-slate-300 text-sm relative z-10">Our {destination.name} experts will get back to you within 24 hours.</p>
               </div>
               <div className="-mt-6 relative z-20">
-                <EnquiryForm defaultDestination={destination.name} />
+                <EnquiryForm />
               </div>
             </div>
           </div>
@@ -255,7 +255,7 @@ export default async function DestinationLandingPage({ params }: { params: any }
             <p className="text-slate-300 text-xs">Our {destination.name} experts are ready to help.</p>
           </div>
           <div className="-mt-4 relative z-10">
-            <EnquiryForm defaultDestination={destination.name} />
+            <EnquiryForm />
           </div>
       </div>
       

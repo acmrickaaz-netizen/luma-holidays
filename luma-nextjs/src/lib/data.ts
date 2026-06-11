@@ -1,11 +1,57 @@
 export const DESTINATIONS = [
-  { id: 'my', name: 'Malaysia', image: '/images/malaysia.jpg', tag: 'City & Theme Parks', price: 'LKR 125,000' },
-  { id: 'sg', name: 'Singapore', image: '/images/singapore.jpg', tag: 'Luxury & Future', price: 'LKR 185,000' },
-  { id: 'cn', name: 'China', image: '/images/china.jpg', tag: 'Heritage & Culture', price: 'LKR 210,000' },
-  { id: 'th', name: 'Thailand (Bangkok)', image: '/images/thailand.jpg', tag: 'Shopping & Street Food', price: 'LKR 95,000' },
-  { id: 'dxb', name: 'Dubai', image: '/images/dubai.jpg', tag: 'Desert & Skyscrapers', price: 'LKR 190,000' },
-  { id: 'mv', name: 'Beach Tours (Maldives)', image: '/images/maldives.jpg', tag: 'Tropical Escape', price: 'LKR 250,000' },
+  { 
+    id: 'dxb', 
+    name: 'Dubai', 
+    tag: 'Gulf Elite', 
+    price: 'Rs. 295,000',
+    vibe: ['City & Shopping', 'Family & Theme Parks']
+  },
+  { 
+    id: 'my', 
+    name: 'Malaysia', 
+    tag: 'Explorer', 
+    price: 'Rs. 185,000',
+    vibe: ['City & Shopping', 'Beach Tours', 'Family & Theme Parks']
+  },
+  { 
+    id: 'sg', 
+    name: 'Singapore', 
+    tag: 'Modernity', 
+    price: 'Rs. 245,000',
+    vibe: ['City & Shopping', 'Family & Theme Parks']
+  },
+  { 
+    id: 'th', 
+    name: 'Thailand', 
+    tag: 'Hub', 
+    price: 'Rs. 175,000',
+    vibe: ['City & Shopping', 'Beach Tours']
+  },
+  { 
+    id: 'cn', 
+    name: 'China', 
+    tag: 'Logistics', 
+    price: 'Rs. 310,000',
+    vibe: ['City & Shopping']
+  },
+  // --- NEW DESTINATIONS ---
+  { 
+    id: 'mv', 
+    name: 'Maldives', 
+    tag: 'Honeymoon', 
+    price: 'Rs. 450,000',
+    vibe: ['Beach Tours']
+  },
+  { 
+    id: 'vn', 
+    name: 'Vietnam', 
+    tag: 'Heritage', 
+    price: 'Rs. 210,000',
+    vibe: ['City & Shopping', 'Beach Tours']
+  }
 ];
+
+// Keep your ITINERARY_MOCK array exactly as it is below this...
 
 export const ITINERARY_MOCK = [
   { day: 1, title: 'Arrival & Welcome', desc: 'Transfer from airport to hotel. Evening at leisure.' },

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import InquireModal from '@/components/InquireModal';
 import Link from 'next/link';
 import { 
   ChevronRight, 
@@ -305,12 +306,10 @@ export default function Home() {
                       <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">Starting Rate</span>
                       <span className="text-xl font-black text-[#00b4a9]">{pkg.price}</span>
                     </div>
-                    <Link 
-                      href={`/contact?pkg=${pkg.id}`}
-                      className="bg-[#0062b1] text-white px-4 py-2.5 rounded-xl font-bold text-xs hover:bg-[#005091] transition-colors shadow-sm"
-                    >
-                      Inquire Now
-                    </Link>
+<InquireModal 
+  destination={pkg.title}
+  className="bg-[#0062b1] text-white px-4 py-2.5 rounded-xl font-bold text-xs hover:bg-[#005091] transition-colors shadow-sm"
+/>
                   </div>
                 </div>
               </div>

@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import { DESTINATIONS, ITINERARY_MOCK } from '@/lib/data';
+import InquireModal from '@/components/InquireModal';
 import EnquiryForm from '@/components/EnquiryForm';
 import { 
   PlaneTakeoff, 
@@ -166,9 +167,10 @@ export default async function DestinationLandingPage({ params }: { params: any }
                       </div>
                       
                       <div className="grid grid-cols-2 gap-2 mt-auto">
-                        <Link href="#enquiry-form" className="bg-[#0062b1] text-white text-center py-2.5 rounded-lg font-bold text-xs hover:bg-[#005091] transition-colors">
-                          Inquire Now
-                        </Link>
+<InquireModal 
+     destination={destination.name}
+     className="bg-[#0062b1] text-white text-center py-2.5 rounded-lg font-bold text-xs hover:bg-[#005091] transition-colors"
+   />
                         <a href="#itinerary-accordion" className="bg-slate-100 text-slate-600 text-center py-2.5 rounded-lg font-bold text-xs hover:bg-slate-200 transition-colors">
                           View Itinerary
                         </a>
@@ -245,15 +247,14 @@ export default async function DestinationLandingPage({ params }: { params: any }
         </div>
       </div>
 
-      {/* 5. MOBILE STICKY CTA BUTTON (Shows only on small screens) */}
-      <div className="lg:hidden fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 p-4 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] z-50">
-        <Link 
-          href="#enquiry-form" 
-          className="w-full flex items-center justify-center bg-[#00b4a9] text-white py-4 rounded-xl font-black shadow-lg hover:bg-[#009b91] active:scale-95 transition-all"
-        >
-          Get a Quote for {destination.name}
-        </Link>
-      </div>
+      {/* 5. MOBILE STICKY CTA BUTTON (Triggers Popup) */}
+<div className="lg:hidden fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 p-4 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] z-50">
+  <InquireModal 
+    destination={destination.name}
+    buttonText={`Get a Quote for ${destination.name}`}
+    className="w-full flex items-center justify-center bg-[#00b4a9] text-white py-4 rounded-xl font-black shadow-lg hover:bg-[#009b91] active:scale-95 transition-all"
+  />
+</div>
 
       {/* Hidden Anchor for Mobile Form Scroll */}
       <div className="lg:hidden block px-4 pb-24" id="enquiry-form">

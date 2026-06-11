@@ -10,7 +10,9 @@ import {
   CheckCircle,
   Clock,
   ChevronDown,
-  Camera
+  Camera,
+  Info,
+  CreditCard
 } from 'lucide-react';
 import Link from 'next/link';
 import { Metadata } from 'next';
@@ -51,7 +53,7 @@ export default async function DestinationLandingPage({ params }: { params: any }
     <div className="min-h-screen bg-slate-50 font-sans pb-24 lg:pb-0">
       
       {/* 1. ABOVE THE FOLD: Hero Experience */}
-      <div className="relative h-[65vh] w-full bg-slate-900 flex flex-col justify-end pb-16">
+      <div className="relative min-h-[75vh] w-full bg-slate-900 flex flex-col justify-center py-20 pb-28">
         <div className="absolute inset-0 z-0">
           <div className="w-full h-full bg-slate-800 flex flex-col items-center justify-center">
              <span className="text-white/20 font-bold text-2xl md:text-4xl tracking-widest uppercase mb-3 text-center px-4">
@@ -61,25 +63,75 @@ export default async function DestinationLandingPage({ params }: { params: any }
                1920 x 1080 px
              </span>
           </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-slate-900/20"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/80 to-slate-900/40"></div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          {/* SEO Breadcrumb */}
-          <nav className="flex text-sm text-slate-300 mb-6 font-medium">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <ChevronRight className="w-4 h-4 mx-2 text-slate-500" />
-            <Link href="/destinations" className="hover:text-white transition-colors">Destinations</Link>
-            <ChevronRight className="w-4 h-4 mx-2 text-slate-500" />
-            <span className="text-[#00b4a9]">{destination.name}</span>
-          </nav>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col lg:flex-row items-center justify-between gap-12 mt-12">
+          
+          {/* Left Side: Title & Breadcrumbs */}
+          <div className="lg:w-1/2 w-full">
+            {/* SEO Breadcrumb */}
+            <nav className="flex text-sm text-slate-300 mb-6 font-medium">
+              <Link href="/" className="hover:text-white transition-colors">Home</Link>
+              <ChevronRight className="w-4 h-4 mx-2 text-slate-500" />
+              <Link href="/destinations" className="hover:text-white transition-colors">Destinations</Link>
+              <ChevronRight className="w-4 h-4 mx-2 text-slate-500" />
+              <span className="text-[#00b4a9]">{destination.name}</span>
+            </nav>
 
-          <span className="bg-[#00b4a9]/20 text-[#00b4a9] px-3 py-1 rounded-full font-bold text-xs uppercase tracking-wider mb-4 inline-block border border-[#00b4a9]/30">
-            {destination.tag}
-          </span>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-tight mb-4 drop-shadow-lg">
-            Discover {destination.name}: <br className="hidden md:block"/> The Ultimate Escape.
-          </h1>
+            <span className="bg-[#00b4a9]/20 text-[#00b4a9] px-3 py-1 rounded-full font-bold text-xs uppercase tracking-wider mb-4 inline-block border border-[#00b4a9]/30">
+              {destination.tag}
+            </span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-tight mb-4 drop-shadow-lg">
+              Discover {destination.name}: <br className="hidden md:block"/> The Ultimate Escape.
+            </h1>
+            <p className="text-slate-300 text-lg max-w-md">
+              Secure your tailored itinerary with complete visa handling and 24/7 on-ground WhatsApp support.
+            </p>
+          </div>
+
+          {/* Right Side: Essential Tips Card */}
+          {destination.essentialInfo && (
+            <div className="lg:w-5/12 w-full mt-8 lg:mt-0 relative translate-y-0 lg:translate-y-12">
+              <div className="bg-white rounded-[32px] shadow-2xl p-6 sm:p-8 text-slate-800">
+                
+                {/* 2x2 Grid Section */}
+                <div className="bg-slate-50 rounded-2xl p-6 grid grid-cols-2 gap-y-6 gap-x-4 mb-8">
+                  <div>
+                    <h4 className="text-lg font-medium text-slate-900">{destination.essentialInfo.currency}</h4>
+                    <p className="text-xs text-slate-500 mt-1 tracking-wide">Currency Name</p>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-medium text-slate-900">{destination.essentialInfo.climate}</h4>
+                    <p className="text-xs text-slate-500 mt-1 tracking-wide">Climate in {destination.name}</p>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-medium text-slate-900">{destination.essentialInfo.bestSeason}</h4>
+                    <p className="text-xs text-slate-500 mt-1 tracking-wide">Best Season</p>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-medium text-slate-900">{destination.essentialInfo.languages}</h4>
+                    <p className="text-xs text-slate-500 mt-1 tracking-wide">Languages Spoken</p>
+                  </div>
+                </div>
+
+                {/* Tips Section */}
+                <h3 className="text-xl font-serif text-slate-900 mb-6">Essential Tips for {destination.name}</h3>
+                <ul className="space-y-5">
+                  {destination.essentialInfo.tips.map((tip: string, idx: number) => (
+                    <li key={idx} className="flex items-center">
+                      <div className="w-8 h-8 rounded-full bg-[#ffcc00] flex items-center justify-center mr-4 shrink-0 shadow-sm">
+                        {idx % 2 === 0 ? <CreditCard className="w-4 h-4 text-slate-900" strokeWidth={2.5}/> : <Info className="w-4 h-4 text-slate-900" strokeWidth={2.5} />}
+                      </div>
+                      <p className="text-sm text-slate-500 leading-snug">{tip}</p>
+                    </li>
+                  ))}
+                </ul>
+
+              </div>
+            </div>
+          )}
+
         </div>
       </div>
 
@@ -124,7 +176,7 @@ export default async function DestinationLandingPage({ params }: { params: any }
               <p className="text-slate-500 text-sm mb-8">Select the foundation for your trip. Every package is fully customizable to your dates and preferences.</p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {destination.packages.map((pkg) => (
+                {destination.packages.map((pkg: any) => (
                   <div key={pkg.id} className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-200 group flex flex-col">
                     <div className="h-40 bg-slate-200 relative flex flex-col items-center justify-center overflow-hidden">
                        <span className="text-slate-500 font-bold text-xs uppercase tracking-widest text-center px-4 mb-2 relative z-10">{pkg.title} Thumbnail</span>

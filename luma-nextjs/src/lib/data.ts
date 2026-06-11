@@ -1,3 +1,33 @@
+export const ITINERARY_MOCK = [
+  { day: 1, title: 'Arrival & Welcome', desc: 'Airport pickup and transfer to your premium accommodation.' },
+  { day: 2, title: 'Guided City Highlights', desc: 'Full day exploring top attractions with a local expert.' },
+  { day: 3, title: 'Leisure & Departure', desc: 'Free time for shopping before your scheduled airport transfer.' }
+];
+
+const generatePackages = (destName: string, basePrice: string) => [
+  {
+    id: 'family-getaway',
+    title: `${destName} Family Getaway`,
+    focus: 'Theme Parks, Wildlife & Family Resorts',
+    price: basePrice,
+    tag: 'Bestseller'
+  },
+  {
+    id: 'city-escapade',
+    title: `${destName} City & Shopping Escapade`,
+    focus: 'Premium Malls, City Tours & Fine Dining',
+    price: 'Rs. 245,000',
+    tag: 'Luxury'
+  },
+  {
+    id: 'twin-explorer',
+    title: `${destName} Twin City Explorer`,
+    focus: 'Multi-City Transit, Border Crossings & Extended Stay',
+    price: 'Rs. 310,000',
+    tag: 'Extended'
+  }
+];
+
 export const DESTINATIONS = [
   { 
     id: 'dxb', 
@@ -5,6 +35,7 @@ export const DESTINATIONS = [
     tag: 'Gulf Elite', 
     price: 'Rs. 295,000',
     vibe: ['City & Shopping', 'Family & Theme Parks'],
+    packages: generatePackages('Dubai', 'Rs. 295,000'),
     itinerary: [
       { day: 1, title: 'Arrival & Marina Walk', desc: 'Arrive from Colombo. Transfer to your 4-star hotel and enjoy a relaxed evening walk along the Dubai Marina.' },
       { day: 2, title: 'City Tour & Burj Khalifa', desc: 'Guided tour of Old Dubai, the Gold Souk, and afternoon tickets to the Burj Khalifa observation deck.' },
@@ -18,6 +49,7 @@ export const DESTINATIONS = [
     tag: 'Explorer', 
     price: 'Rs. 185,000',
     vibe: ['City & Shopping', 'Beach Tours', 'Family & Theme Parks'],
+    packages: generatePackages('Malaysia', 'Rs. 185,000'),
     itinerary: [
       { day: 1, title: 'Kuala Lumpur Arrival', desc: 'Meet and greet at KUL airport. Transfer to city-center hotel and evening free at leisure.' },
       { day: 2, title: 'Genting Highlands & Batu Caves', desc: 'Full day excursion to Genting via cable car, with a photography stop at the iconic Batu Caves.' },
@@ -31,6 +63,7 @@ export const DESTINATIONS = [
     tag: 'Modernity', 
     price: 'Rs. 245,000',
     vibe: ['City & Shopping', 'Family & Theme Parks'],
+    packages: generatePackages('Singapore', 'Rs. 245,000'),
     itinerary: [
       { day: 1, title: 'Changi Arrival & Jewel', desc: 'Experience the stunning Jewel Changi waterfall upon arrival before checking into your hotel.' },
       { day: 2, title: 'Universal Studios Singapore', desc: 'Full day pass to Sentosa Island and Universal Studios for world-class rides and attractions.' },
@@ -44,6 +77,7 @@ export const DESTINATIONS = [
     tag: 'Hub', 
     price: 'Rs. 175,000',
     vibe: ['City & Shopping', 'Beach Tours'],
+    packages: generatePackages('Thailand', 'Rs. 175,000'),
     itinerary: [
       { day: 1, title: 'Bangkok Arrival', desc: 'Seamless airport pickup and transfer to your central Bangkok hotel. Evening free to explore local night markets.' },
       { day: 2, title: 'Safari World & Marine Park', desc: 'Full day family-friendly excursion with buffet lunch and live wildlife shows.' },
@@ -58,6 +92,7 @@ export const DESTINATIONS = [
     tag: 'Logistics', 
     price: 'Rs. 310,000',
     vibe: ['City & Shopping'],
+    packages: generatePackages('China', 'Rs. 310,000'),
     itinerary: [
       { day: 1, title: 'Beijing Touchdown', desc: 'Arrival in Beijing. Fast-tracked hotel check-in and evening welcome dinner.' },
       { day: 2, title: 'The Great Wall', desc: 'Guided excursion to the Mutianyu section of the Great Wall, including cable car access.' },
@@ -72,6 +107,7 @@ export const DESTINATIONS = [
     tag: 'Honeymoon', 
     price: 'Rs. 450,000',
     vibe: ['Beach Tours'],
+    packages: generatePackages('Maldives', 'Rs. 450,000'),
     itinerary: [
       { day: 1, title: 'Male Arrival & Speedboat', desc: 'Short direct flight from Colombo. VIP greeting at Male airport and immediate speedboat transfer to your private island resort.' },
       { day: 2, title: 'Overwater Villa Leisure', desc: 'Full day of relaxation. Enjoy the all-inclusive resort amenities, infinity pools, and crystal-clear lagoon access.' },
@@ -85,6 +121,7 @@ export const DESTINATIONS = [
     tag: 'Heritage', 
     price: 'Rs. 210,000',
     vibe: ['City & Shopping', 'Beach Tours'],
+    packages: generatePackages('Vietnam', 'Rs. 210,000'),
     itinerary: [
       { day: 1, title: 'Hanoi Arrival', desc: 'Arrive in the bustling capital of Hanoi. Check-in and enjoy an evening traditional Water Puppet show.' },
       { day: 2, title: 'Halong Bay Cruise', desc: 'Drive to the coast to board a premium junk boat. Cruise through the towering limestone islands with fresh seafood lunch.' },
@@ -93,11 +130,4 @@ export const DESTINATIONS = [
       { day: 5, title: 'Departure', desc: 'Morning at leisure for coffee and souvenir shopping before your airport transfer.' }
     ]
   }
-];
-
-// Fallback mock data just in case a page loads without a specific itinerary
-export const ITINERARY_MOCK = [
-  { day: 1, title: 'Arrival & Welcome', desc: 'Airport pickup and transfer to your premium accommodation.' },
-  { day: 2, title: 'Guided City Highlights', desc: 'Full day exploring top attractions with a local expert.' },
-  { day: 3, title: 'Leisure & Departure', desc: 'Free time for shopping before your scheduled airport transfer.' }
 ];

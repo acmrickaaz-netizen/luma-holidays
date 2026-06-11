@@ -47,28 +47,6 @@ export default async function DestinationLandingPage({ params }: { params: any }
     notFound(); 
   }
 
-  // Generate dynamic sub-packages based on the destination name to fill the grid
-  const subPackages = [
-    {
-      title: `${destination.name} Family Getaway`,
-      focus: 'Theme Parks, Wildlife & Family Resorts',
-      price: destination.price,
-      tag: 'Bestseller'
-    },
-    {
-      title: `${destination.name} City & Shopping Escapade`,
-      focus: 'Premium Malls, City Tours & Fine Dining',
-      price: 'Rs. 245,000',
-      tag: 'Luxury'
-    },
-    {
-      title: `${destination.name} Twin City Explorer`,
-      focus: 'Multi-City Transit, Border Crossings & Extended Stay',
-      price: 'Rs. 310,000',
-      tag: 'Extended'
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-slate-50 font-sans pb-24 lg:pb-0">
       
@@ -146,8 +124,8 @@ export default async function DestinationLandingPage({ params }: { params: any }
               <p className="text-slate-500 text-sm mb-8">Select the foundation for your trip. Every package is fully customizable to your dates and preferences.</p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {subPackages.map((pkg, idx) => (
-                  <div key={idx} className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-200 group flex flex-col">
+                {destination.packages.map((pkg) => (
+                  <div key={pkg.id} className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-200 group flex flex-col">
                     <div className="h-40 bg-slate-200 relative flex flex-col items-center justify-center overflow-hidden">
                        <span className="text-slate-500 font-bold text-xs uppercase tracking-widest text-center px-4 mb-2 relative z-10">{pkg.title} Thumbnail</span>
                        <span className="text-slate-400 font-mono text-[10px] tracking-wider bg-slate-300/50 px-2 py-0.5 rounded relative z-10">600 x 400 px</span>
@@ -167,13 +145,16 @@ export default async function DestinationLandingPage({ params }: { params: any }
                       </div>
                       
                       <div className="grid grid-cols-2 gap-2 mt-auto">
-<InquireModal 
-     destination={destination.name}
-     className="bg-[#0062b1] text-white text-center py-2.5 rounded-lg font-bold text-xs hover:bg-[#005091] transition-colors"
-   />
-                        <a href="#itinerary-accordion" className="bg-slate-100 text-slate-600 text-center py-2.5 rounded-lg font-bold text-xs hover:bg-slate-200 transition-colors">
+                        <InquireModal 
+                          destination={pkg.title}
+                          className="bg-[#0062b1] text-white text-center py-2.5 rounded-lg font-bold text-xs hover:bg-[#005091] transition-colors"
+                        />
+                        <Link 
+                          href={`/destinations/${destination.id}/${pkg.id}`} 
+                          className="bg-slate-100 text-slate-600 text-center py-2.5 rounded-lg font-bold text-xs hover:bg-slate-200 transition-colors block"
+                        >
                           View Itinerary
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -248,13 +229,13 @@ export default async function DestinationLandingPage({ params }: { params: any }
       </div>
 
       {/* 5. MOBILE STICKY CTA BUTTON (Triggers Popup) */}
-<div className="lg:hidden fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 p-4 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] z-50">
-  <InquireModal 
-    destination={destination.name}
-    buttonText={`Get a Quote for ${destination.name}`}
-    className="w-full flex items-center justify-center bg-[#00b4a9] text-white py-4 rounded-xl font-black shadow-lg hover:bg-[#009b91] active:scale-95 transition-all"
-  />
-</div>
+      <div className="lg:hidden fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 p-4 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] z-50">
+        <InquireModal 
+          destination={destination.name}
+          buttonText={`Get a Quote for ${destination.name}`}
+          className="w-full flex items-center justify-center bg-[#00b4a9] text-white py-4 rounded-xl font-black shadow-lg hover:bg-[#009b91] active:scale-95 transition-all"
+        />
+      </div>
 
       {/* Hidden Anchor for Mobile Form Scroll */}
       <div className="lg:hidden block px-4 pb-24" id="enquiry-form">

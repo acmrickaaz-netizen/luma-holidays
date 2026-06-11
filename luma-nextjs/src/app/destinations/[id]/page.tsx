@@ -7,7 +7,6 @@ import {
   Sun, 
   ChevronRight, 
   CheckCircle,
-  MapPin,
   Clock,
   ChevronDown,
   Camera
@@ -75,8 +74,13 @@ export default async function DestinationLandingPage({ params }: { params: any }
       {/* 1. ABOVE THE FOLD: Hero Experience */}
       <div className="relative h-[65vh] w-full bg-slate-900 flex flex-col justify-end pb-16">
         <div className="absolute inset-0 z-0">
-          <div className="w-full h-full bg-slate-800 flex items-center justify-center">
-             <span className="text-white/10 font-bold text-4xl tracking-widest uppercase">Cinematic Background</span>
+          <div className="w-full h-full bg-slate-800 flex flex-col items-center justify-center">
+             <span className="text-white/20 font-bold text-2xl md:text-4xl tracking-widest uppercase mb-3 text-center px-4">
+               {destination.name} Hero Background
+             </span>
+             <span className="text-white/30 font-mono text-xl tracking-widest bg-white/5 px-4 py-1 rounded-md">
+               1920 x 1080 px
+             </span>
           </div>
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-slate-900/20"></div>
         </div>
@@ -143,10 +147,12 @@ export default async function DestinationLandingPage({ params }: { params: any }
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {subPackages.map((pkg, idx) => (
                   <div key={idx} className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-200 group flex flex-col">
-                    <div className="h-40 bg-slate-200 relative flex items-center justify-center overflow-hidden">
-                       <span className="text-slate-400 font-bold text-sm uppercase tracking-widest">{pkg.title}</span>
-                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-                       <span className="absolute bottom-4 left-4 bg-[#00b4a9] text-white text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-wider">
+                    <div className="h-40 bg-slate-200 relative flex flex-col items-center justify-center overflow-hidden">
+                       <span className="text-slate-500 font-bold text-xs uppercase tracking-widest text-center px-4 mb-2 relative z-10">{pkg.title} Thumbnail</span>
+                       <span className="text-slate-400 font-mono text-[10px] tracking-wider bg-slate-300/50 px-2 py-0.5 rounded relative z-10">600 x 400 px</span>
+                       
+                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent z-0"></div>
+                       <span className="absolute bottom-4 left-4 bg-[#00b4a9] text-white text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-wider z-10">
                          {pkg.tag}
                        </span>
                     </div>
@@ -211,10 +217,11 @@ export default async function DestinationLandingPage({ params }: { params: any }
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {[1, 2, 3].map((img) => (
                   <div key={img} className="aspect-square bg-slate-200 rounded-2xl overflow-hidden relative group">
-                    <div className="absolute inset-0 flex items-center justify-center text-slate-400 font-bold text-xs uppercase tracking-widest group-hover:scale-110 transition-transform duration-500">
-                      Photo {img}
+                    <div className="absolute inset-0 flex flex-col items-center justify-center group-hover:scale-110 transition-transform duration-500 z-10">
+                      <span className="text-slate-500 font-bold text-xs uppercase tracking-widest mb-2 text-center px-2">Gallery Image {img}</span>
+                      <span className="text-slate-400 font-mono text-[10px] tracking-wider bg-slate-300/50 px-2 py-0.5 rounded">800 x 800 px</span>
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
                   </div>
                 ))}
               </div>
@@ -231,7 +238,7 @@ export default async function DestinationLandingPage({ params }: { params: any }
                 <p className="text-slate-300 text-sm relative z-10">Our {destination.name} experts will get back to you within 24 hours.</p>
               </div>
               <div className="-mt-6 relative z-20">
-                <EnquiryForm />
+                <EnquiryForm destination={destination.name} />
               </div>
             </div>
           </div>
@@ -255,7 +262,7 @@ export default async function DestinationLandingPage({ params }: { params: any }
             <p className="text-slate-300 text-xs">Our {destination.name} experts are ready to help.</p>
           </div>
           <div className="-mt-4 relative z-10">
-            <EnquiryForm />
+            <EnquiryForm destination={destination.name} />
           </div>
       </div>
       

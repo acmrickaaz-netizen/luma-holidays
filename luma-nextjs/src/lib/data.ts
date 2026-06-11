@@ -3,7 +3,7 @@ export const DESTINATIONS = [
   { id: 'sg', name: 'Singapore', image: '/images/singapore.jpg', tag: 'Luxury & Future', price: 'LKR 185,000' },
   { id: 'cn', name: 'China', image: '/images/china.jpg', tag: 'Heritage & Culture', price: 'LKR 210,000' },
   { id: 'th', name: 'Thailand (Bangkok)', image: '/images/thailand.jpg', tag: 'Shopping & Street Food', price: 'LKR 95,000' },
-  { id: 'ae', name: 'Dubai', image: '/images/dubai.jpg', tag: 'Desert & Skyscrapers', price: 'LKR 190,000' },
+  { id: 'dxb', name: 'Dubai', image: '/images/dubai.jpg', tag: 'Desert & Skyscrapers', price: 'LKR 190,000' },
   { id: 'mv', name: 'Beach Tours (Maldives)', image: '/images/maldives.jpg', tag: 'Tropical Escape', price: 'LKR 250,000' },
 ];
 

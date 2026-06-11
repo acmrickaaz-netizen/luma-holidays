@@ -5,16 +5,19 @@ import { Calendar, PlaneTakeoff, MapPin, Users, CheckCircle, X, ChevronRight } f
 import Link from 'next/link';
 import { Metadata } from 'next';
 
-// 1. TELL VERCEL WHICH PAGES TO BUILD
+// 1. TELL VERCEL WHICH PAGES TO BUILD (Lowercase safety)
 export function generateStaticParams() {
   return DESTINATIONS.map((dest) => ({
-    id: dest.id,
+    id: String(dest.id).toLowerCase(),
   }));
 }
 
-// 2. DYNAMIC SEO METADATA GENERATOR
-export function generateMetadata({ params }: { params: { id: string } }): Metadata {
-  const destination = DESTINATIONS.find(d => d.id === params.id);
+// 2. DYNAMIC SEO METADATA (Async params safety)
+export async function generateMetadata({ params }: { params: any }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const safeId = String(resolvedParams.id).toLowerCase();
+
+  const destination = DESTINATIONS.find(d => String(d.id).toLowerCase() === safeId);
   if (!destination) return { title: 'Not Found' };
 
   return {
@@ -23,8 +26,12 @@ export function generateMetadata({ params }: { params: { id: string } }): Metada
   };
 }
 
-export default function PackageDetail({ params }: { params: { id: string } }) {
-  const destination = DESTINATIONS.find(d => d.id === params.id);
+// 3. MAIN COMPONENT (Async params + lowercase safety)
+export default async function PackageDetail({ params }: { params: any }) {
+  const resolvedParams = await params;
+  const safeId = String(resolvedParams.id).toLowerCase();
+
+  const destination = DESTINATIONS.find(d => String(d.id).toLowerCase() === safeId);
 
   if (!destination) {
     notFound(); 

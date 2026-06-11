@@ -181,13 +181,13 @@ export default async function DestinationLandingPage({ params }: { params: any }
               </div>
             </section>
 
-            {/* 4. INTERACTIVE ITINERARY ACCORDION */}
+           {/* 4. INTERACTIVE ITINERARY ACCORDION */}
             <section id="itinerary-accordion" className="scroll-mt-32">
               <h2 className="text-3xl font-black text-slate-800 mb-8 flex items-center">
-                <Clock className="w-8 h-8 text-[#00b4a9] mr-3" /> Sample Daily Flow
+                <Clock className="w-8 h-8 text-[#00b4a9] mr-3" /> Daily Itinerary
               </h2>
               <div className="space-y-4">
-                {ITINERARY_MOCK.map((item) => (
+                {(destination.itinerary || ITINERARY_MOCK).map((item) => (
                   <details key={item.day} className="group bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden [&_summary::-webkit-details-marker]:hidden">
                     <summary className="flex items-center justify-between p-6 cursor-pointer hover:bg-slate-50 transition-colors">
                       <div className="flex items-center">

@@ -1,26 +1,55 @@
+'use client';
+
 import Link from 'next/link';
-import { CheckCircle } from 'lucide-react';
-import { Metadata } from 'next';
+import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
+import { CheckCircle, Home, MessageCircle } from 'lucide-react';
 
-// SEO trick: We don't want Google indexing our thank you page!
-export const metadata: Metadata = {
-  title: "Thank You | Luma Holidays",
-  robots: { index: false, follow: false }
-};
+function ThankYouContent() {
+  const searchParams = useSearchParams();
+  const name = searchParams.get('name') || 'Traveler';
+  const firstName = name.split(' ')[0]; // Grab just the first name for a friendlier tone
 
-export default function ThankYou() {
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="text-center bg-white p-12 rounded-3xl shadow-xl border border-slate-100 max-w-lg">
-        <CheckCircle className="w-20 h-20 text-[#00b4a9] mx-auto mb-6" />
-        <h1 className="text-4xl font-extrabold text-slate-800 mb-4">Thank You!</h1>
-        <p className="text-slate-600 mb-8 leading-relaxed">
-          Your inquiry has been successfully submitted. One of our dedicated travel experts will review your request and get back to you via WhatsApp or Email within 24 hours.
-        </p>
-        <Link href="/" className="inline-block bg-[#0062b1] text-white px-8 py-3 rounded-full font-bold hover:bg-[#005091] transition-colors">
-          Back to Home
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
+      <div className="bg-white max-w-lg w-full rounded-[40px] shadow-2xl p-10 md:p-14 text-center relative overflow-hidden border border-slate-100">
+        
+        {/* Decorative Background Elements */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 -mt-20 w-40 h-40 bg-[#00b4a9] rounded-full opacity-10 blur-3xl"></div>
+        
+        <div className="w-20 h-20 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner">
+          <CheckCircle className="w-10 h-10" />
+        </div>
+
+        <h1 className="text-3xl font-black text-slate-800 mb-4 tracking-tight">
+          Thanks, {firstName}!
+        </h1>
+        
+        <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 mb-8 text-left">
+          <p className="text-slate-600 leading-relaxed font-medium">
+            Rickaaz from Luma Holidays is currently checking flight availability from Colombo based on your preferences.
+          </p>
+          <div className="flex items-center mt-4 text-[#00b4a9] font-bold text-sm bg-teal-50 px-4 py-3 rounded-xl">
+            <MessageCircle className="w-5 h-5 mr-3 fill-current" />
+            Expect your custom quote on WhatsApp within 30 minutes.
+          </div>
+        </div>
+
+        <Link 
+          href="/" 
+          className="inline-flex items-center justify-center bg-slate-900 text-white px-8 py-4 rounded-xl font-bold hover:bg-slate-800 transition-all shadow-md hover:shadow-lg w-full"
+        >
+          <Home className="w-4 h-4 mr-2" /> Return to Homepage
         </Link>
       </div>
     </div>
+  );
+}
+
+export default function ThankYouPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-slate-50 flex items-center justify-center"><div className="w-10 h-10 border-4 border-[#00b4a9] border-t-transparent rounded-full animate-spin"></div></div>}>
+      <ThankYouContent />
+    </Suspense>
   );
 }

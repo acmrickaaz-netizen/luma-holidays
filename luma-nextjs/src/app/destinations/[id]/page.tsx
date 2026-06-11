@@ -5,7 +5,14 @@ import { Calendar, PlaneTakeoff, MapPin, Users, CheckCircle, X, ChevronRight } f
 import Link from 'next/link';
 import { Metadata } from 'next';
 
-// DYNAMIC SEO METADATA GENERATOR
+// 1. TELL VERCEL WHICH PAGES TO BUILD
+export function generateStaticParams() {
+  return DESTINATIONS.map((dest) => ({
+    id: dest.id,
+  }));
+}
+
+// 2. DYNAMIC SEO METADATA GENERATOR
 export function generateMetadata({ params }: { params: { id: string } }): Metadata {
   const destination = DESTINATIONS.find(d => d.id === params.id);
   if (!destination) return { title: 'Not Found' };

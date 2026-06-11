@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/luma-nextjs/$1"
+    }
+  ]
+}

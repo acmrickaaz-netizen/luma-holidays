@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import InquireModal from '@/components/InquireModal';
 import Link from 'next/link';
+import Image from 'next/image'; // <--- ADD THIS LINE
 import { 
   ChevronRight, 
   MapPin, 
@@ -69,12 +70,15 @@ export default function Home() {
       {/* 1. THE GLOBAL HEADER */}
       <header className="sticky top-0 z-50 backdrop-blur-md bg-white/70 border-b border-white/20 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <Link href="/" className="flex flex-col cursor-pointer group">
-            <div className="flex items-center space-x-1">
-              <span className="font-extrabold text-2xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#00b4a9] to-[#009bd6]">Luma</span>
-              <span className="font-extrabold text-2xl tracking-tight text-slate-800">Holidays</span>
-            </div>
-            <span className="text-[9px] font-bold text-slate-400 tracking-widest uppercase ml-0.5 -mt-1 group-hover:text-[#009bd6] transition-colors">travel with love</span>
+<Link href="/" className="flex items-center cursor-pointer group transition-opacity hover:opacity-90">
+            <Image 
+              src="/logo.png" 
+              alt="Luma Holidays Logo" 
+              width={200} 
+              height={50} 
+              className="object-contain w-auto h-10 md:h-12" 
+              priority 
+            />
           </Link>
 
           <nav className="hidden md:flex items-center space-x-8 font-medium text-sm text-slate-600">

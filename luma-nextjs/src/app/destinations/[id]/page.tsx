@@ -12,7 +12,11 @@ import {
   ChevronDown,
   Camera,
   Info,
-  CreditCard
+  CreditCard,
+  Wallet,          // <-- NEW
+  ThermometerSun,  // <-- NEW
+  Calendar,        // <-- NEW
+  MessageCircle    // <-- NEW
 } from 'lucide-react';
 import Link from 'next/link';
 import { Metadata } from 'next';
@@ -92,38 +96,47 @@ export default async function DestinationLandingPage({ params }: { params: any }
 
           {/* Right Side: Essential Tips Card */}
           {destination.essentialInfo && (
-            <div className="lg:w-5/12 w-full mt-8 lg:mt-0 relative translate-y-0 lg:translate-y-12">
-              <div className="bg-white rounded-[32px] shadow-2xl p-6 sm:p-8 text-slate-800">
+            <div className="lg:w-5/12 w-full mt-12 lg:mt-0 relative translate-y-0 lg:translate-y-12">
+              <div className="bg-white/95 backdrop-blur-xl border border-white/50 rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.15)] p-6 sm:p-8 text-slate-800 relative overflow-hidden group">
                 
-                {/* 2x2 Grid Section */}
-                <div className="bg-slate-50 rounded-2xl p-6 grid grid-cols-2 gap-y-6 gap-x-4 mb-8">
-                  <div>
-                    <h4 className="text-lg font-medium text-slate-900">{destination.essentialInfo.currency}</h4>
-                    <p className="text-xs text-slate-500 mt-1 tracking-wide">Currency Name</p>
+                {/* Top Brand Gradient Line */}
+                <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#00b4a9] to-[#009bd6]"></div>
+
+                {/* 2x2 Grid Section with Individual Cards */}
+                <div className="grid grid-cols-2 gap-3 mb-8 pt-2">
+                  <div className="bg-slate-50 hover:bg-teal-50/50 border border-slate-100 rounded-2xl p-4 transition-colors">
+                    <Wallet className="w-5 h-5 text-[#00b4a9] mb-2" />
+                    <h4 className="text-sm font-bold text-slate-900">{destination.essentialInfo.currency}</h4>
+                    <p className="text-[10px] text-slate-400 mt-0.5 uppercase tracking-widest font-bold">Currency</p>
                   </div>
-                  <div>
-                    <h4 className="text-lg font-medium text-slate-900">{destination.essentialInfo.climate}</h4>
-                    <p className="text-xs text-slate-500 mt-1 tracking-wide">Climate in {destination.name}</p>
+                  <div className="bg-slate-50 hover:bg-teal-50/50 border border-slate-100 rounded-2xl p-4 transition-colors">
+                    <ThermometerSun className="w-5 h-5 text-[#009bd6] mb-2" />
+                    <h4 className="text-sm font-bold text-slate-900">{destination.essentialInfo.climate}</h4>
+                    <p className="text-[10px] text-slate-400 mt-0.5 uppercase tracking-widest font-bold">Climate</p>
                   </div>
-                  <div>
-                    <h4 className="text-lg font-medium text-slate-900">{destination.essentialInfo.bestSeason}</h4>
-                    <p className="text-xs text-slate-500 mt-1 tracking-wide">Best Season</p>
+                  <div className="bg-slate-50 hover:bg-teal-50/50 border border-slate-100 rounded-2xl p-4 transition-colors">
+                    <Calendar className="w-5 h-5 text-amber-500 mb-2" />
+                    <h4 className="text-sm font-bold text-slate-900">{destination.essentialInfo.bestSeason}</h4>
+                    <p className="text-[10px] text-slate-400 mt-0.5 uppercase tracking-widest font-bold">Best Season</p>
                   </div>
-                  <div>
-                    <h4 className="text-lg font-medium text-slate-900">{destination.essentialInfo.languages}</h4>
-                    <p className="text-xs text-slate-500 mt-1 tracking-wide">Languages Spoken</p>
+                  <div className="bg-slate-50 hover:bg-teal-50/50 border border-slate-100 rounded-2xl p-4 transition-colors">
+                    <MessageCircle className="w-5 h-5 text-[#0062b1] mb-2" />
+                    <h4 className="text-sm font-bold text-slate-900">{destination.essentialInfo.languages}</h4>
+                    <p className="text-[10px] text-slate-400 mt-0.5 uppercase tracking-widest font-bold">Languages</p>
                   </div>
                 </div>
 
                 {/* Tips Section */}
-                <h3 className="text-xl font-serif text-slate-900 mb-6">Essential Tips for {destination.name}</h3>
-                <ul className="space-y-5">
+                <h3 className="text-lg font-black text-slate-900 mb-5 flex items-center">
+                   <Info className="w-5 h-5 text-[#00b4a9] mr-2" /> Essential Tips
+                </h3>
+                <ul className="space-y-4">
                   {destination.essentialInfo.tips.map((tip: string, idx: number) => (
-                    <li key={idx} className="flex items-center">
-                      <div className="w-8 h-8 rounded-full bg-[#ffcc00] flex items-center justify-center mr-4 shrink-0 shadow-sm">
-                        {idx % 2 === 0 ? <CreditCard className="w-4 h-4 text-slate-900" strokeWidth={2.5}/> : <Info className="w-4 h-4 text-slate-900" strokeWidth={2.5} />}
+                    <li key={idx} className="flex items-start">
+                      <div className="w-6 h-6 rounded-full bg-[#e6f5fc] flex items-center justify-center mr-3 shrink-0 border border-[#b3e1f4] mt-0.5">
+                        <CheckCircle className="w-3.5 h-3.5 text-[#0062b1]" strokeWidth={2.5}/>
                       </div>
-                      <p className="text-sm text-slate-500 leading-snug">{tip}</p>
+                      <p className="text-sm text-slate-600 leading-relaxed">{tip}</p>
                     </li>
                   ))}
                 </ul>

@@ -74,9 +74,9 @@ export default function Home() {
             <Image 
               src="/logo.png" 
               alt="Luma Holidays Logo" 
-              width={200} 
-              height={50} 
-              className="object-contain w-auto h-10 md:h-12" 
+              width={300} 
+              height={75} 
+              className="object-contain w-auto h-14 md:h-16" 
               priority 
             />
           </Link>

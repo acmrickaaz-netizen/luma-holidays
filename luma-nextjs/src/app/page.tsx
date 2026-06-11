@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { 
   ChevronRight, 
-  Compass, 
   MapPin, 
   Calendar, 
   FileText, 
@@ -14,16 +13,13 @@ import {
   ArrowRight,
   MessageCircle
 } from 'lucide-react';
-import { DESTINATIONS } from '@/lib/data';
 
 export default function Home() {
-  // Simple form state for the Quick Catch Hero Form
   const [quickForm, setQuickForm] = useState({
     destination: '',
     month: ''
   });
 
-  // Mock data for Featured Packages based on your core hubs
   const featuredPackages = [
     {
       id: 'th-pkg',
@@ -51,7 +47,6 @@ export default function Home() {
     }
   ];
 
-  // Mock data for Social Proof Carousel / Reviews
   const reviews = [
     {
       name: 'Nimal Silva',
@@ -70,10 +65,9 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
       
-      {/* 1. THE GLOBAL HEADER (Sticky Glassmorphism) */}
+      {/* 1. THE GLOBAL HEADER */}
       <header className="sticky top-0 z-50 backdrop-blur-md bg-white/70 border-b border-white/20 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          {/* Logo Container */}
           <Link href="/" className="flex flex-col cursor-pointer group">
             <div className="flex items-center space-x-1">
               <span className="font-extrabold text-2xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#00b4a9] to-[#009bd6]">Luma</span>
@@ -82,14 +76,12 @@ export default function Home() {
             <span className="text-[9px] font-bold text-slate-400 tracking-widest uppercase ml-0.5 -mt-1 group-hover:text-[#009bd6] transition-colors">travel with love</span>
           </Link>
 
-          {/* Navigation Links */}
           <nav className="hidden md:flex items-center space-x-8 font-medium text-sm text-slate-600">
             <Link href="/destinations" className="hover:text-[#00b4a9] transition-colors">Destinations</Link>
             <Link href="/about" className="hover:text-[#00b4a9] transition-colors">About Us</Link>
             <Link href="/contact" className="hover:text-[#00b4a9] transition-colors">Contact</Link>
           </nav>
 
-          {/* WhatsApp / Quote CTA */}
           <div className="flex items-center space-x-4">
             <Link 
               href="https://wa.me/94771234567" 
@@ -102,20 +94,20 @@ export default function Home() {
         </div>
       </header>
 
-      {/* 2. THE HERO SECTION (Above the Fold with Quick Catch Form) */}
+      {/* 2. THE HERO SECTION */}
       <section className="relative min-h-[85vh] flex items-center justify-center pt-20 pb-24 overflow-hidden">
-        {/* Background Cinematic Visual Placeholder */}
-        <div className="absolute inset-0 z-0">
-          <div className="w-full h-full bg-slate-800 flex items-center justify-center">
-            {/* Soft pulsing colors mimicking cinematic travel loops */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-slate-900 via-indigo-950 to-slate-900 opacity-90"></div>
-            <span className="text-white/10 font-bold text-7xl tracking-widest uppercase select-none animate-pulse">Cinematic 4K Loop</span>
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-slate-900/40 to-slate-50"></div>
+        {/* Placeholder: Hero Video/Image */}
+        <div className="absolute inset-0 z-0 bg-slate-900 flex flex-col items-center justify-center">
+          <span className="text-white/20 font-bold text-3xl md:text-5xl tracking-widest uppercase mb-4 text-center px-4 relative z-10">
+            Home Page Hero Media
+          </span>
+          <span className="text-white/30 font-mono text-xl tracking-widest bg-white/5 px-4 py-1.5 rounded-md relative z-10">
+            1920 x 1080 px
+          </span>
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-slate-900/60 to-slate-50 z-20"></div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Hero Text */}
+        <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 text-center lg:text-left">
             <span className="bg-[#00b4a9]/20 text-[#00b4a9] px-4 py-1.5 rounded-full font-semibold text-xs uppercase tracking-wider mb-4 inline-block backdrop-blur-sm border border-[#00b4a9]/30">
               Premier Colombo Outbound Agency
@@ -129,7 +121,6 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Quick Catch Floating Form */}
           <div className="lg:col-span-5 w-full max-w-md mx-auto">
             <div className="bg-white/80 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-white/50 relative">
               <h3 className="text-xl font-bold text-slate-800 mb-1">Start Planning</h3>
@@ -184,19 +175,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. DESTINATION & CATEGORY GRID (Visual Core Hubs & Style Filters) */}
+      {/* 3. DESTINATION & CATEGORY GRID */}
       <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl sm:text-4xl font-black text-slate-800 mb-4">Explore Core Asian & Gulf Hubs</h2>
           <p className="text-slate-500 text-sm sm:text-base">We optimize specific routes natively out of Bandaranaike International Airport for streamlined transits and priority bookings.</p>
         </div>
 
-        {/* Masonry-Style Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[220px]">
-          {/* Dubai (Large Card) */}
+          
+          {/* Dubai */}
           <Link href="/destinations/dxb" className="md:col-span-8 md:row-span-2 group relative rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-100 block bg-slate-900">
-            <div className="w-full h-full bg-slate-700 flex items-center justify-center group-hover:scale-105 transition-transform duration-700 opacity-40">
-              <span className="text-white text-lg font-bold">Dubai Premium Luxury</span>
+            <div className="w-full h-full bg-slate-800 flex flex-col items-center justify-center group-hover:scale-105 transition-transform duration-700 opacity-80">
+              <span className="text-white/60 text-xl font-bold mb-2">Dubai Featured Grid</span>
+              <span className="text-white/40 font-mono text-[11px] tracking-widest bg-white/5 px-2 py-1 rounded">800 x 800 px</span>
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent"></div>
             <div className="absolute bottom-0 left-0 p-8">
@@ -207,8 +199,9 @@ export default function Home() {
 
           {/* Malaysia */}
           <Link href="/destinations/my" className="md:col-span-4 group relative rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-100 block bg-slate-900">
-            <div className="w-full h-full bg-slate-600 flex items-center justify-center group-hover:scale-105 transition-transform duration-700 opacity-40">
-              <span className="text-white text-md font-bold">Kuala Lumpur / Genting</span>
+            <div className="w-full h-full bg-slate-800 flex flex-col items-center justify-center group-hover:scale-105 transition-transform duration-700 opacity-80">
+              <span className="text-white/60 text-sm font-bold mb-1">Malaysia Grid</span>
+              <span className="text-white/40 font-mono text-[10px] tracking-widest bg-white/5 px-2 py-0.5 rounded">600 x 400 px</span>
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 to-transparent"></div>
             <div className="absolute bottom-0 left-0 p-6">
@@ -218,8 +211,9 @@ export default function Home() {
 
           {/* Singapore */}
           <Link href="/destinations/sg" className="md:col-span-4 group relative rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-100 block bg-slate-900">
-            <div className="w-full h-full bg-slate-600 flex items-center justify-center group-hover:scale-105 transition-transform duration-700 opacity-40">
-              <span className="text-white text-md font-bold">Singapore Horizon</span>
+            <div className="w-full h-full bg-slate-800 flex flex-col items-center justify-center group-hover:scale-105 transition-transform duration-700 opacity-80">
+              <span className="text-white/60 text-sm font-bold mb-1">Singapore Grid</span>
+              <span className="text-white/40 font-mono text-[10px] tracking-widest bg-white/5 px-2 py-0.5 rounded">600 x 400 px</span>
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 to-transparent"></div>
             <div className="absolute bottom-0 left-0 p-6">
@@ -227,10 +221,11 @@ export default function Home() {
             </div>
           </Link>
 
-          {/* Highlighted Thematic Category: Beach Tours */}
-          <Link href="/destinations?cat=beach" className="md:col-span-6 group relative rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-teal-500/20 block bg-gradient-to-br from-teal-950 to-slate-900">
-            <div className="w-full h-full bg-teal-800/20 flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
-              <span className="text-teal-400 text-sm font-bold tracking-widest uppercase">Coastal / Honeymoon</span>
+          {/* Highlighted Thematic Category */}
+          <Link href="/destinations?cat=beach" className="md:col-span-6 group relative rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-teal-500/20 block bg-slate-900">
+            <div className="w-full h-full bg-teal-900/40 flex flex-col items-center justify-center group-hover:scale-105 transition-transform duration-700 opacity-80">
+              <span className="text-teal-400/80 text-sm font-bold mb-1">Beach Categories Grid</span>
+              <span className="text-teal-400/50 font-mono text-[10px] tracking-widest bg-teal-900/30 px-2 py-0.5 rounded">800 x 400 px</span>
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-teal-950 via-slate-950/40 to-transparent"></div>
             <div className="absolute bottom-0 left-0 p-8 w-full flex items-end justify-between">
@@ -247,8 +242,9 @@ export default function Home() {
 
           {/* Thailand */}
           <Link href="/destinations/th" className="md:col-span-3 group relative rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-100 block bg-slate-900">
-            <div className="w-full h-full bg-slate-600 flex items-center justify-center group-hover:scale-105 transition-transform duration-700 opacity-40">
-              <span className="text-white text-sm font-bold">Bangkok Temples</span>
+            <div className="w-full h-full bg-slate-800 flex flex-col items-center justify-center group-hover:scale-105 transition-transform duration-700 opacity-80">
+              <span className="text-white/60 text-sm font-bold mb-1 text-center">Thailand Grid</span>
+              <span className="text-white/40 font-mono text-[10px] tracking-widest bg-white/5 px-2 py-0.5 rounded">600 x 400 px</span>
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 to-transparent"></div>
             <div className="absolute bottom-0 left-0 p-6">
@@ -258,8 +254,9 @@ export default function Home() {
 
           {/* China */}
           <Link href="/destinations/cn" className="md:col-span-3 group relative rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-100 block bg-slate-900">
-            <div className="w-full h-full bg-slate-600 flex items-center justify-center group-hover:scale-105 transition-transform duration-700 opacity-40">
-              <span className="text-white text-sm font-bold">Heritage Sites</span>
+            <div className="w-full h-full bg-slate-800 flex flex-col items-center justify-center group-hover:scale-105 transition-transform duration-700 opacity-80">
+              <span className="text-white/60 text-sm font-bold mb-1 text-center">China Grid</span>
+              <span className="text-white/40 font-mono text-[10px] tracking-widest bg-white/5 px-2 py-0.5 rounded">600 x 400 px</span>
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 to-transparent"></div>
             <div className="absolute bottom-0 left-0 p-6">
@@ -269,7 +266,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. FEATURED TOUR PACKAGES (High-Conversion Itinerary Showcase) */}
+      {/* 4. FEATURED TOUR PACKAGES */}
       <section className="py-24 bg-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16">
@@ -286,16 +283,17 @@ export default function Home() {
             {featuredPackages.map((pkg) => (
               <div key={pkg.id} className="bg-white rounded-3xl overflow-hidden shadow-md border border-slate-200/60 flex flex-col h-full group hover:shadow-xl transition-all">
                 {/* Package Thumbnail Grid Overlay */}
-                <div className="h-52 bg-slate-200 relative flex items-center justify-center text-slate-400 font-bold overflow-hidden">
-                  <div className="w-full h-full bg-gradient-to-br from-slate-300 to-slate-200 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
-                    <span className="text-sm uppercase tracking-wider text-slate-500">{pkg.imageText} Preview</span>
+                <div className="h-52 bg-slate-200 relative flex flex-col items-center justify-center overflow-hidden">
+                  <div className="absolute inset-0 w-full h-full bg-slate-800 flex flex-col items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                    <span className="text-white/60 text-sm font-bold mb-2 uppercase tracking-widest text-center px-4">{pkg.imageText} Thumbnail</span>
+                    <span className="text-white/40 font-mono text-[10px] tracking-widest bg-white/10 px-2 py-1 rounded">600 x 400 px</span>
                   </div>
-                  <span className="absolute top-4 left-4 bg-slate-900 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+                  <span className="absolute top-4 left-4 bg-slate-900 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider z-10">
                     {pkg.tag}
                   </span>
                 </div>
 
-                {/* Card Content */}
                 <div className="p-6 flex flex-col flex-grow">
                   <h3 className="text-lg font-extrabold text-slate-800 mb-2 leading-snug line-clamp-2">
                     {pkg.title}
@@ -321,7 +319,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. THE "WHY LUMA?" TRUST BLOCK (Anxiety Eradication Framework) */}
+      {/* 5. THE "WHY LUMA?" TRUST BLOCK */}
       <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-slate-900 text-white rounded-[40px] p-8 md:p-16 relative overflow-hidden shadow-xl">
           <div className="absolute top-0 right-0 -mr-24 -mt-24 w-80 h-80 bg-[#009bd6] rounded-full opacity-10 blur-3xl"></div>
@@ -332,7 +330,6 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 relative z-10">
-            {/* Trust Element 1 */}
             <div className="flex flex-col">
               <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-[#00b4a9] mb-6">
                 <FileText className="w-6 h-6" />
@@ -343,7 +340,6 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Trust Element 2 */}
             <div className="flex flex-col">
               <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-[#009bd6] mb-6">
                 <PhoneCall className="w-6 h-6" />
@@ -354,7 +350,6 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Trust Element 3 */}
             <div className="flex flex-col">
               <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-teal-400 mb-6">
                 <ShieldCheck className="w-6 h-6" />
@@ -368,7 +363,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. SOCIAL PROOF (5-Star Verified Google Pipeline Testimonials) */}
+      {/* 6. SOCIAL PROOF */}
       <section className="py-24 bg-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">

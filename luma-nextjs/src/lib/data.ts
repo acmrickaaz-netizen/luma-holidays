@@ -35,6 +35,7 @@ export const DESTINATIONS = [
     tag: 'Gulf Elite', 
     price: 'Rs. 295,000',
     vibe: ['City & Shopping', 'Family & Theme Parks'],
+    includes: ['flight', 'hotel', 'meals', 'transfer'], // <-- ADD THIS LINE
     packages: generatePackages('Dubai', 'Rs. 295,000'),
     itinerary: [
       { day: 1, title: 'Arrival & Marina Walk', desc: 'Arrive from Colombo. Transfer to your 4-star hotel and enjoy a relaxed evening walk along the Dubai Marina.' },
@@ -49,6 +50,7 @@ export const DESTINATIONS = [
     tag: 'Explorer', 
     price: 'Rs. 185,000',
     vibe: ['City & Shopping', 'Beach Tours', 'Family & Theme Parks'],
+    includes: ['flight', 'hotel', 'meals', 'transfer'], // <-- ADD THIS LINE
     packages: generatePackages('Malaysia', 'Rs. 185,000'),
     itinerary: [
       { day: 1, title: 'Kuala Lumpur Arrival', desc: 'Meet and greet at KUL airport. Transfer to city-center hotel and evening free at leisure.' },
@@ -63,6 +65,7 @@ export const DESTINATIONS = [
     tag: 'Modernity', 
     price: 'Rs. 245,000',
     vibe: ['City & Shopping', 'Family & Theme Parks'],
+    includes: ['flight', 'hotel', 'meals', 'transfer'], // <-- ADD THIS LINE
     packages: generatePackages('Singapore', 'Rs. 245,000'),
     itinerary: [
       { day: 1, title: 'Changi Arrival & Jewel', desc: 'Experience the stunning Jewel Changi waterfall upon arrival before checking into your hotel.' },
@@ -77,6 +80,7 @@ export const DESTINATIONS = [
     tag: 'Hub', 
     price: 'Rs. 175,000',
     vibe: ['City & Shopping', 'Beach Tours'],
+    includes: ['flight', 'hotel', 'meals', 'transfer'], // <-- ADD THIS LINE
     packages: generatePackages('Thailand', 'Rs. 175,000'),
     itinerary: [
       { day: 1, title: 'Bangkok Arrival', desc: 'Seamless airport pickup and transfer to your central Bangkok hotel. Evening free to explore local night markets.' },
@@ -92,6 +96,7 @@ export const DESTINATIONS = [
     tag: 'Logistics', 
     price: 'Rs. 310,000',
     vibe: ['City & Shopping'],
+    includes: ['flight', 'hotel', 'meals', 'transfer'], // <-- ADD THIS LINE
     packages: generatePackages('China', 'Rs. 310,000'),
     itinerary: [
       { day: 1, title: 'Beijing Touchdown', desc: 'Arrival in Beijing. Fast-tracked hotel check-in and evening welcome dinner.' },
@@ -107,6 +112,7 @@ export const DESTINATIONS = [
     tag: 'Honeymoon', 
     price: 'Rs. 450,000',
     vibe: ['Beach Tours'],
+    includes: ['flight', 'hotel', 'meals', 'transfer'], // <-- ADD THIS LINE
     packages: generatePackages('Maldives', 'Rs. 450,000'),
     itinerary: [
       { day: 1, title: 'Male Arrival & Speedboat', desc: 'Short direct flight from Colombo. VIP greeting at Male airport and immediate speedboat transfer to your private island resort.' },
@@ -121,6 +127,7 @@ export const DESTINATIONS = [
     tag: 'Heritage', 
     price: 'Rs. 210,000',
     vibe: ['City & Shopping', 'Beach Tours'],
+    includes: ['flight', 'hotel', 'meals', 'transfer'], // <-- ADD THIS LINE
     packages: generatePackages('Vietnam', 'Rs. 210,000'),
     itinerary: [
       { day: 1, title: 'Hanoi Arrival', desc: 'Arrive in the bustling capital of Hanoi. Check-in and enjoy an evening traditional Water Puppet show.' },

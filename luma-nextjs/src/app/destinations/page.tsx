@@ -2,7 +2,19 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Compass, MapPin, ArrowRight, Sun, Building2, Palmtree, Search } from 'lucide-react';
+import { 
+  Compass, 
+  MapPin, 
+  ArrowRight, 
+  Sun, 
+  Building2, 
+  Palmtree, 
+  Search,
+  Plane,
+  Bed,
+  Utensils,
+  Car
+} from 'lucide-react';
 import { DESTINATIONS } from '@/lib/data';
 
 export default function DestinationsOverviewPage() {
@@ -160,13 +172,39 @@ export default function DestinationsOverviewPage() {
                 </div>
               </div>
 
-              {/* Card Content */}
+{/* Card Content */}
               <div className="p-6 flex flex-col flex-grow">
-                <div className="flex justify-between items-center mb-6 pt-2">
+                <div className="flex justify-between items-end mb-6 pt-2">
                   <div>
-                    <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">Starting Price</span>
+                    <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Starting Price</span>
                     <span className="text-xl font-black text-[#009bd6]">{dest.price}</span>
                   </div>
+                  
+                  {/* INCLUSION ICONS (The circled area) */}
+                  {dest.includes && (
+                    <div className="flex space-x-1.5">
+                      {dest.includes.includes('flight') && (
+                        <div className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:text-[#00b4a9] hover:bg-teal-50 transition-colors" title="Flights Included">
+                          <Plane className="w-3.5 h-3.5" />
+                        </div>
+                      )}
+                      {dest.includes.includes('hotel') && (
+                        <div className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:text-[#00b4a9] hover:bg-teal-50 transition-colors" title="Hotel Included">
+                          <Bed className="w-3.5 h-3.5" />
+                        </div>
+                      )}
+                      {dest.includes.includes('meals') && (
+                        <div className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:text-[#00b4a9] hover:bg-teal-50 transition-colors" title="Meals Included">
+                          <Utensils className="w-3.5 h-3.5" />
+                        </div>
+                      )}
+                      {dest.includes.includes('transfer') && (
+                        <div className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:text-[#00b4a9] hover:bg-teal-50 transition-colors" title="Transfers Included">
+                          <Car className="w-3.5 h-3.5" />
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
                 
                 <div className="mt-auto border-t border-slate-100 pt-6">

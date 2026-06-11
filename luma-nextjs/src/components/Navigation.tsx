@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 import { Menu, X, PlaneTakeoff } from 'lucide-react';
 
 export default function Navigation() {
@@ -20,17 +21,16 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-20">
           
           {/* Logo with Brand Colors */}
-          <Link href="/" className="flex-shrink-0 flex flex-col justify-center cursor-pointer group">
-            <div className="flex items-center space-x-1">
-              <span className="font-extrabold text-3xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#00b4a9] via-[#009bd6] to-[#009bd6]">
-                Luma
-              </span>
-              <span className="font-extrabold text-3xl tracking-tight text-[#0062b1]">
-                Holidays
-              </span>
-            </div>
-            <span className="text-[10px] font-bold text-slate-500 tracking-widest uppercase ml-1 -mt-1 group-hover:text-[#009bd6] transition-colors">travel with love</span>
-          </Link>
+<Link href="/" className="flex items-center cursor-pointer group transition-opacity hover:opacity-90">
+  <Image 
+    src="/logo.png" 
+    alt="Luma Holidays Logo" 
+    width={300} 
+    height={75} 
+    className="object-contain w-auto h-14 md:h-16" 
+    priority 
+  />
+</Link>
           
           {/* Desktop Links */}
           <div className="hidden md:flex space-x-8 items-center">

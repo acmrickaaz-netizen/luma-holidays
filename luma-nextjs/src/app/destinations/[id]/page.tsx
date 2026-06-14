@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation';
 import { DESTINATIONS, ITINERARY_MOCK } from '@/lib/data';
 import InquireModal from '@/components/InquireModal';
 import EnquiryForm from '@/components/EnquiryForm';
+import { db } from '@/lib/firebase';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 import { 
   PlaneTakeoff, 
   FileText, 
@@ -47,11 +49,21 @@ export default async function DestinationLandingPage({ params }: { params: any }
   const resolvedParams = await params;
   const safeId = String(resolvedParams.id).toLowerCase();
 
-  const destination = DESTINATIONS.find(d => String(d.id).toLowerCase() === safeId);
+const destination = DESTINATIONS.find(d => String(d.id).toLowerCase() === safeId);
 
   if (!destination) {
     notFound(); 
   }
+
+  // --- NEW BACKEND FETCH ---
+  const packagesRef = collection(db, 'packages');
+  const q = query(packagesRef, where('destinationId', '==', safeId));
+  const querySnapshot = await getDocs(q);
+  const livePackages = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+  // Smart transition: Use live packages if they exist, otherwise fallback to the old static ones!
+  const displayPackages = livePackages.length > 0 ? livePackages : destination.packages;
+  // -------------------------  
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans pb-24 lg:pb-0">
@@ -189,7 +201,7 @@ export default async function DestinationLandingPage({ params }: { params: any }
               <p className="text-slate-500 text-sm mb-8">Select the foundation for your trip. Every package is fully customizable to your dates and preferences.</p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {destination.packages.map((pkg: any) => (
+                {displayPackages.map((pkg: any) => (
                   <div key={pkg.id} className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-200 group flex flex-col">
                     <div className="h-40 bg-slate-200 relative flex flex-col items-center justify-center overflow-hidden">
                        <span className="text-slate-500 font-bold text-xs uppercase tracking-widest text-center px-4 mb-2 relative z-10">{pkg.title} Thumbnail</span>

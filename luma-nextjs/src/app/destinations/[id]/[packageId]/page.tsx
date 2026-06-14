@@ -3,21 +3,59 @@ import { db } from '@/lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { DESTINATIONS, ITINERARY_MOCK } from '@/lib/data';
 import Link from 'next/link';
-import { ChevronRight, Clock, CheckCircle, Calendar, DollarSign, PlaneTakeoff } from 'lucide-react';
+import { ChevronRight, CheckCircle, PlaneTakeoff } from 'lucide-react';
 import InquireModal from '@/components/InquireModal';
+import { Metadata } from 'next';
 
+// --- 1. DYNAMIC SEO METADATA ---
+// This tells Google exactly what the page is about before it even renders visually.
+export async function generateMetadata({ params }: { params: any }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const safeDestId = String(resolvedParams.id).toLowerCase();
+  const safePkgId = String(resolvedParams.packageId);
+
+  let packageDetails: any = null;
+  const staticDestination = DESTINATIONS.find(d => String(d.id).toLowerCase() === safeDestId);
+
+  // Check Firebase first
+  try {
+    const docRef = doc(db, 'packages', safePkgId);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      packageDetails = { id: docSnap.id, ...docSnap.data() };
+    }
+  } catch (error) {}
+
+  // Fallback to static
+  if (!packageDetails && staticDestination) {
+    packageDetails = staticDestination.packages.find((p: any) => String(p.id) === safePkgId);
+  }
+
+  if (!packageDetails) return { title: 'Package Not Found' };
+
+  return {
+    title: `${packageDetails.title} | ${staticDestination?.name || 'Luma Holidays'} Tour Packages`,
+    description: `Book the ${packageDetails.title} starting at ${packageDetails.price}. ${packageDetails.focus}. Enjoy a curated itinerary with Luma Holidays.`,
+    keywords: [packageDetails.title, `${staticDestination?.name} tour`, 'Sri Lanka travel agency', 'holiday packages', packageDetails.tag],
+    openGraph: {
+      title: `${packageDetails.title} | Luma Holidays`,
+      description: packageDetails.focus,
+      type: 'website',
+    }
+  };
+}
+
+// --- 2. MAIN COMPONENT ---
 export default async function PackageDetailPage({ params }: { params: any }) {
   const resolvedParams = await params;
   const safeDestId = String(resolvedParams.id).toLowerCase();
-  const safePkgId = String(resolvedParams.packageId); // Firebase IDs are case-sensitive strings
+  const safePkgId = String(resolvedParams.packageId); 
 
-  // 1. Try to fetch the specific package from Firebase
   let packageDetails: any = null;
   
   try {
     const docRef = doc(db, 'packages', safePkgId);
     const docSnap = await getDoc(docRef);
-    
     if (docSnap.exists()) {
       packageDetails = { id: docSnap.id, ...docSnap.data() };
     }
@@ -25,35 +63,57 @@ export default async function PackageDetailPage({ params }: { params: any }) {
     console.error("Error fetching package from Firebase:", error);
   }
 
-  // 2. Fallback to static data if not found in Firebase (keeps old packages working)
   const staticDestination = DESTINATIONS.find(d => String(d.id).toLowerCase() === safeDestId);
   
   if (!packageDetails && staticDestination) {
     packageDetails = staticDestination.packages.find((p: any) => String(p.id) === safePkgId);
   }
 
-  // 3. If it doesn't exist in Firebase OR static data, trigger 404
   if (!packageDetails) {
     notFound();
   }
 
+  // --- 3. JSON-LD STRUCTURED DATA FOR GOOGLE RICH SNIPPETS ---
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product', // Tells Google this is a purchasable tour
+    name: packageDetails.title,
+    description: packageDetails.focus,
+    brand: {
+      '@type': 'Brand',
+      name: 'Luma Holidays'
+    },
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'LKR',
+      price: packageDetails.price.replace(/[^0-9]/g, ''), // Strips "Rs." to give Google raw numbers
+      availability: 'https://schema.org/InStock',
+      url: `https://yourwebsite.com/destinations/${safeDestId}/${safePkgId}`
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-slate-50 font-sans pb-24">
+    <article className="min-h-screen bg-slate-50 font-sans pb-24">
+      {/* Injecting Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       
       {/* Hero Section */}
-      <div className="bg-slate-900 pt-28 pb-16 px-4 relative overflow-hidden">
+      <header className="bg-slate-900 pt-28 pb-16 px-4 relative overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-20 bg-[url('/placeholder-bg.jpg')] bg-cover bg-center"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent z-10"></div>
         
         <div className="max-w-4xl mx-auto relative z-20">
-          <nav className="flex text-sm text-slate-400 mb-6 font-medium">
+          <nav className="flex text-sm text-slate-400 mb-6 font-medium" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <ChevronRight className="w-4 h-4 mx-2 text-slate-600" />
             <Link href="/destinations" className="hover:text-white transition-colors">Destinations</Link>
             <ChevronRight className="w-4 h-4 mx-2 text-slate-600" />
             <Link href={`/destinations/${safeDestId}`} className="hover:text-white transition-colors capitalize">{safeDestId}</Link>
             <ChevronRight className="w-4 h-4 mx-2 text-slate-600" />
-            <span className="text-[#00b4a9] truncate max-w-[200px]">{packageDetails.title}</span>
+            <span className="text-[#00b4a9] truncate max-w-[200px]" aria-current="page">{packageDetails.title}</span>
           </nav>
 
           <span className="bg-[#00b4a9]/20 text-[#00b4a9] px-3 py-1 rounded-full font-bold text-xs uppercase tracking-wider mb-4 inline-block border border-[#00b4a9]/30">
@@ -66,10 +126,10 @@ export default async function PackageDetailPage({ params }: { params: any }) {
             {packageDetails.focus}
           </p>
         </div>
-      </div>
+      </header>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4 -mt-8 relative z-30">
+      <section className="max-w-4xl mx-auto px-4 -mt-8 relative z-30">
         <div className="bg-white rounded-3xl shadow-xl border border-slate-200 p-8 flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
           <div className="flex items-center space-x-6">
             <div>
@@ -98,7 +158,6 @@ export default async function PackageDetailPage({ params }: { params: any }) {
         </h2>
         
         <div className="space-y-4">
-          {/* Note: In the future, you can save specific itineraries to the Firebase package doc. For now, it uses the global mock data to show the layout */}
           {ITINERARY_MOCK.map((item) => (
             <div key={item.day} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 flex gap-6">
               <div className="flex flex-col items-center">
@@ -115,7 +174,7 @@ export default async function PackageDetailPage({ params }: { params: any }) {
           ))}
         </div>
 
-      </div>
-    </div>
+      </section>
+    </article>
   );
 }
